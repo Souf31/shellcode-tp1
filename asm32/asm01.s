@@ -1,10 +1,7 @@
-extern printf
-
+global _start
 section .text
 
-global main
-
-main:
-    mov eax, 0
-    mov ebx, 1
+_start:
+    mov eax, 1
+    mov ebx, 0
     int 80h
