@@ -28,19 +28,12 @@ _start:                ;User prompt
   and al, 1
   jz end_return_1_even
 
-  ;Output the message '1337'
-  mov eax, 4
-  mov ebx, 1
-  mov ecx, number
-  mov edx, numberLen
-  int 80h
-
   ; Exit code
   mov eax, 1
-  mov ebx, 0
+  mov ebx, 1
   int 80h
 
 end_return_1_even:
   mov eax, 1
-  mov ebx, 1
+  mov ebx, 0
   int 80h
