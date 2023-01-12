@@ -3,7 +3,7 @@ section .data                           ;Data segment
    lenUserMsg equ $-userMsg             ;The length of the message
    dispMsg db 'You have entered: '
    lenDispMsg equ $-dispMsg
-   value db '42'
+   value: db '42', 2
    valueLen: equ $-value
    number:     db '1337', 4
  	 numberLen:  equ $-number
@@ -28,13 +28,15 @@ _start:                ;User prompt
   mov edx, 5          ;5 bytes (numeric, 1 for sign) of that information
   int 80h
 
+  cmp ecx, value
+  jne end_return_1
+
   ;Output the message '1337'
   mov eax, 4
   mov ebx, 1
   mov ecx, number
   mov edx, numberLen
   int 80h
-
 
   ; Exit code
   mov eax, 1
