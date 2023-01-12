@@ -26,7 +26,8 @@ _start:                ;User prompt
   mov edx, 5          ;5 bytes (numeric, 1 for sign) of that information
   int 80h
 
-  cmp ecx, value
+  mov al, byte[num]
+  cmp al, byte[value]
   jne end_return_1
 
   ;Output the message '1337'
