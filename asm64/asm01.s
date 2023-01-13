@@ -1,8 +1,7 @@
+global _start
 section .text
 
-global main
-
-main:
-    mov rax, 0
-    mov rbx, 1
-    int 80h
+_start:
+    mov rax, 60
+    mov rdi, 0
+    syscall
