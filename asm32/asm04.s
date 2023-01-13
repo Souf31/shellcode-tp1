@@ -19,21 +19,31 @@ _start:                ;User prompt
 
   ;Read and store the user input
   mov eax, 3
-  mov ebx, 2
+  mov ebx, 0
   mov ecx, num
   mov edx, 5          ;5 bytes (numeric, 1 for sign) of that information
   int 80h
 
-  mov al, byte[num]
-  and al, 1
-  jz end_return_1_even
+  mov ecx, 16
 
-  ; Exit code
-  mov eax, 1
-  mov ebx, 1
-  int 80h
+.loop:
+  mov al, [num + ecx]
+  cmp al, 10
+  je check_if_pair
+  dec ecx
+  cmp ecx, 0
+  je end
+  jmp .loop
 
-end_return_1_even:
+check_if_pair:
+  mov eax, num
+  add eax, ecx
+  dec eax
+  mov bl, [eax]
+  and bl, 1
+  ;cmp bl, 1
+
+
+end:
   mov eax, 1
-  mov ebx, 0
   int 80h
